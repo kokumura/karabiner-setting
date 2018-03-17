@@ -18,7 +18,7 @@ rules: [
             key_code: "left_command",
             modifiers: [
               "left_control",
-              "left_option"
+              "left_option",
             ]
           }
         ]
@@ -37,7 +37,7 @@ rules: [
             mandatory: [
               "left_command",
               "left_control",
-              "left_option"
+              "left_option",
             ]
           }
         },
@@ -46,7 +46,7 @@ rules: [
             key_code: "q",
             modifiers: [
               "left_control",
-              "left_command"
+              "left_command",
             ]
           }
         ]
@@ -54,4 +54,28 @@ rules: [
     ]
   },
   
+  {
+    description: "option + tab to command+F1 (switch application window)",
+    manipulators: [
+      {
+        type: "basic",
+        from: {
+          key_code: "tab",
+          modifiers: {
+            mandatory: [
+              "left_option",
+            ]
+          }
+        },
+        to: [
+          {
+            key_code: "f1",
+            modifiers: [
+              "left_command",
+            ]
+          }
+        ]
+      }
+    ]
+  },
 ]
