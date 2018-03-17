@@ -6,10 +6,13 @@ const program = require("commander");
 const CSON = require("cson");
 const expandTilde = require('expand-tilde');
 
+const KARABINER_JSON_FILE = '~/.config/karabiner/karabiner.json';
+const KARABINER_CMOD_DIR = '~/.config/karabiner/assets/complex_modifications';
+
 program
   .usage('')
   .option('-t, --test')
-  .option('-f, --setting-file [file]', 'karabiner.json file', '~/.config/karabiner/karabiner.json')
+  .option('-f, --setting-file [file]', 'karabiner.json file', KARABINER_JSON_FILE)
   .parse(process.argv);
 
 program.parse(process.argv);
@@ -33,6 +36,9 @@ for(var cmFile of cmFiles){
       console.log(util.format("add rule: '%s'", rule.description));
       profile.complex_modifications.rules.push(rule);
     }
+    var cmJsonFile = expandTilde(KARABINER_CMOD_DIR + "/" + path.basename(cmFile).replace(".cson",".json"));
+    fs.writeFileSync(cmJsonFile,JSON.stringify(cmObj,null,2),'utf8');
+    console.log(util.format("wrote cmod file: '%s'", cmJsonFile));
   }
 }
 
@@ -47,7 +53,7 @@ if(program.test){
   }
   fs.writeFileSync(backupFilePath,origSettingJSON,'utf8');
   fs.writeFileSync(settingFilePath,modifiedSettingJSON,'utf8');
-  console.log(util.format("wrote '%s' (backup: '%s')", settingFilePath, backupFilePath));
+  console.log(util.format("wrote setting file: '%s' (backup: '%s')", settingFilePath, backupFilePath));
 }
 
 
