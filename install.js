@@ -39,6 +39,10 @@ for(var cmFile of cmFiles){
     var cmJsonFile = expandTilde(KARABINER_CMOD_DIR + "/" + path.basename(cmFile).replace(".cson",".json"));
     fs.writeFileSync(cmJsonFile,JSON.stringify(cmObj,null,2),'utf8');
     console.log(util.format("wrote cmod file: '%s'", cmJsonFile));
+  } else {
+    console.log(cmObj);
+    console.error(`CSON parse error in '${cmFile}'`);
+    process.exit(1);
   }
 }
 

@@ -1,0 +1,32 @@
+title: "Mac OSX global keymaps",
+rules: [
+###############################################
+
+  {
+  description: "suppress command+Q"
+  manipulators: [
+    {
+      type: "basic"
+
+      from:
+        key_code: "q"
+        modifiers:
+          mandatory: [
+            "left_command"
+          ]
+
+      to: [
+        {
+          key_code: "escape"
+          modifiers: [
+            "left_option"
+            "left_command"
+          ]
+        }
+      ]
+    }
+
+  ]} # end of rule
+
+###############################################
+] # end of rules
