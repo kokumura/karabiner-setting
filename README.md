@@ -3,8 +3,8 @@ my complex_modifications settings for Karabiner-Elements
 
 ## install
 ```
-npm install
-node install.js complex_modifications/*.cson
+pip install -r requirements.txt
+python install.py complex_modifications/*.yml
 ```
 
 ## reference

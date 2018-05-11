@@ -1,0 +1,29 @@
+title: "Mac OSX global keymaps"
+rules:
+
+  - description: "suppress command+Q (remap to option+command+escape)"
+    manipulators:
+      - type: basic
+        from:
+          key_code: q
+          modifiers:
+            mandatory:
+              - left_command
+        to:
+          - key_code: escape
+            modifiers:
+              - left_option
+              - left_command
+
+  - description: "option + tab to command+F1 (switch application window)"
+    manipulators:
+      - type: basic
+        from:
+          key_code: tab
+          modifiers:
+            mandatory:
+              - left_option
+        to:
+          - key_code: f1
+            modifiers:
+              - left_command
