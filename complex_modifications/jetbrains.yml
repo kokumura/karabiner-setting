@@ -1,0 +1,50 @@
+title: "Fix problems in JetBrains IDEs"
+rules:
+
+  - description: "swap backslash and option+backslash (excluding Terminal.app)"
+    # workaround for following issue.
+    #   "IntelliJとかJVMのIDE使いでもKarabinerなしでバックスラッシュを片手入力したい"
+    #   - https://qiita.com/tanakahisateru/items/d8a67ad89c07baf8c0da
+    manipulators:
+      - type: basic
+        from:
+          key_code: international3
+        to:
+          - key_code: international3
+            modifiers:
+              - left_option
+        conditions:
+          # exclude Terminal.app because this hack not works in Terminal.app
+          - type: frontmost_application_unless
+            bundle_identifiers:
+              - ^com\.apple\.Terminal$
+      - type: basic
+        from:
+          key_code: international3
+          modifiers:
+            mandatory:
+              - left_option
+        to:
+          - key_code: international3
+        conditions:
+          - type: frontmost_application_unless
+            bundle_identifiers:
+              - ^com\.apple\.Terminal$
+
+  - description: "change control+H to Backspace (only in JetBrains IDEs)"
+    # workaround for following issue. ("Ctrl-H" is hardcoded)
+    #   "Replace shortcut no longer shows replace box when find box is already open"
+    #   - https://intellij-support.jetbrains.com/hc/en-us/community/posts/115000782410-Replace-shortcut-no-longer-shows-replace-box-when-find-box-is-already-open
+    manipulators:
+      - type: basic
+        from:
+          key_code: h
+          modifiers:
+            mandatory:
+              - left_control
+        to:
+          - key_code: delete_or_backspace
+        conditions:
+          - type: frontmost_application_if
+            bundle_identifiers:
+              - ^com\.jetbrains\.

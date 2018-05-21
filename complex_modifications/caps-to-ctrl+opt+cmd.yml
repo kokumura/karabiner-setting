@@ -15,7 +15,7 @@ rules:
               - left_control
               - left_option
 
-  - description: "control+option+command + escape to control+command+Q (lock screeßn)"
+  - description: "control+option+command + escape to control+command+Q (lock screen)"
     manipulators:
       - type: basic
         from:
