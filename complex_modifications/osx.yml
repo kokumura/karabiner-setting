@@ -45,6 +45,26 @@ rules:
         to:
           - key_code: display_brightness_increment
 
+  - description: "map japanese_(eisuu|kana) to (left|right)_command unless pressed alone"
+    manipulators:
+      - type: basic
+        from:
+          key_code: japanese_eisuu
+          modifiers:
+            optional: [any]
+        to:
+          - {key_code: left_command}
+        to_if_alone:
+          - {key_code: japanese_eisuu}
+      - type: basic
+        from:
+          key_code: japanese_kana
+          modifiers:
+            optional: [any]
+        to:
+          - {key_code: right_command}
+        to_if_alone:
+          - {key_code: japanese_kana}
 
   - description: "swap [f7-f12] and fn+[f7-f12]"
     manipulators:
