@@ -45,6 +45,16 @@ rules:
         to:
           - key_code: display_brightness_increment
 
+  - description: "remap control+m to return"
+    manipulators:
+      - type: basic
+        from:
+          key_code: m
+          modifiers:
+            mandatory: [ left_control ]
+        to:
+          - key_code: return_or_enter
+
   - description: "map japanese_(eisuu|kana) to (left|right)_command unless pressed alone"
     manipulators:
       - type: basic
@@ -75,7 +85,7 @@ rules:
           - key_code: rewind
       - type: basic
         from:
-          key_code: rewind
+          key_code: f7
           modifiers:
             mandatory: [ fn ]
         to:
@@ -87,7 +97,7 @@ rules:
           - key_code: play_or_pause
       - type: basic
         from:
-          key_code: play_or_pause
+          key_code: f8
           modifiers:
             mandatory: [ fn ]
         to:
@@ -99,7 +109,7 @@ rules:
           - key_code: fastforward
       - type: basic
         from:
-          key_code: fastforward
+          key_code: f9
           modifiers:
             mandatory: [ fn ]
         to:
@@ -111,7 +121,7 @@ rules:
           - key_code: mute
       - type: basic
         from:
-          key_code: mute
+          key_code: f10
           modifiers:
             mandatory: [ fn ]
         to:
@@ -123,7 +133,7 @@ rules:
           - key_code: volume_decrement
       - type: basic
         from:
-          key_code: volume_decrement
+          key_code: f11
           modifiers:
             mandatory: [ fn ]
         to:
@@ -135,7 +145,7 @@ rules:
           - key_code: volume_increment
       - type: basic
         from:
-          key_code: volume_increment
+          key_code: f12
           modifiers:
             mandatory: [ fn ]
         to:

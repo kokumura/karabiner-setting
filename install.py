@@ -46,7 +46,7 @@ def main(args):
             
             cm_dest_json_file = os.path.expanduser(os.path.join(
                 KARABINER_CMOD_DIR,
-                re.sub(r'\.[^\.]$','.json', os.path.basename(cm_file)),
+                re.sub(r'\.[^\.]+$','.json', os.path.basename(cm_file)),
             ))
             with open(cm_dest_json_file,'w') as f:
                 json.dump(cm_obj, f, indent=2)
