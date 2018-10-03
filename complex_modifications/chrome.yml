@@ -1,6 +1,6 @@
 title: "for Google Chrome"
 rules:
-  - description: "Google Chrome: command+(p|n) and command+(left|right) to (prev|next) tab"
+  - description: "Google Chrome: command+(p|n) to command+(left|right) [(prev|next) tab]"
     manipulators:
 
       - type: basic
@@ -10,10 +10,9 @@ rules:
             mandatory:
               - command
         to:
-          - key_code: tab
+          - key_code: left_arrow
             modifiers:
-              - left_control
-              - left_shift
+              - left_command
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
@@ -26,40 +25,9 @@ rules:
             mandatory:
               - command
         to:
-          - key_code: tab
+          - key_code: right_arrow
             modifiers:
-              - left_control
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.google\.Chrome$
-
-      - type: basic
-        from:
-          key_code: left
-          modifiers:
-            mandatory:
-              - command
-        to:
-          - key_code: tab
-            modifiers:
-              - left_control
-              - left_shift
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.google\.Chrome$
-
-      - type: basic
-        from:
-          key_code: right
-          modifiers:
-            mandatory:
-              - command
-        to:
-          - key_code: tab
-            modifiers:
-              - left_control
+              - left_command
         conditions:
           - type: frontmost_application_if
             bundle_identifiers:
