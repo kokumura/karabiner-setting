@@ -1,0 +1,45 @@
+title: "Settings for keyboards has JIS layout"
+_aliases:
+  manipulator_base: &manipulator_base
+    conditions:
+      - type: device_if
+        identifiers: [{ vendor_id: 76, product_id: 615 }]
+
+rules:
+
+  - description: "[JIS] Change caps_lock key to control+option+command."
+    manipulators:
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: caps_lock
+          modifiers:
+            optional:
+              - any
+        to:
+          - key_code: left_command
+            modifiers:
+              - left_control
+              - left_option
+
+  - description: "[JIS] map japanese_(eisuu|kana) to (left|right)_command unless pressed alone"
+    manipulators:
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: japanese_eisuu
+          modifiers:
+            optional: [ any ]
+        to:
+          - key_code: left_command
+        to_if_alone:
+          - key_code: japanese_eisuu
+      - type: basic
+        from:
+          key_code: japanese_kana
+          modifiers:
+            optional: [ any ]
+        to:
+          - key_code: right_command
+        to_if_alone:
+          - key_code: japanese_kana

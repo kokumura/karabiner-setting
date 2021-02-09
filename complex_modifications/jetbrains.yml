@@ -1,4 +1,16 @@
 title: "Fix problems in JetBrains IDEs"
+_aliases:
+  conditions_excluding_terminal: &conditions_excluding_terminal
+    conditions:
+      - type: frontmost_application_unless
+        bundle_identifiers:
+          - ^com\.apple\.Terminal$
+  conditions_pycharm: &conditions_jetbrains
+    conditions:
+      - type: frontmost_application_if
+        bundle_identifiers:
+          - ^com\.jetbrains\.
+
 rules:
 
   - description: "swap backslash and option+backslash (excluding Terminal.app)"
@@ -7,18 +19,16 @@ rules:
     #   - https://qiita.com/tanakahisateru/items/d8a67ad89c07baf8c0da
     manipulators:
       - type: basic
+        # exclude Terminal.app because this hack not works in Terminal.app
+        <<: *conditions_excluding_terminal
         from:
           key_code: international3
         to:
           - key_code: international3
             modifiers:
               - left_option
-        conditions:
-          # exclude Terminal.app because this hack not works in Terminal.app
-          - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^com\.apple\.Terminal$
       - type: basic
+        <<: *conditions_excluding_terminal
         from:
           key_code: international3
           modifiers:
@@ -26,10 +36,6 @@ rules:
               - left_option
         to:
           - key_code: international3
-        conditions:
-          - type: frontmost_application_unless
-            bundle_identifiers:
-              - ^com\.apple\.Terminal$
 
   - description: "change control+H to Backspace (only in JetBrains IDEs)"
     # workaround for following issue. ("Ctrl-H" is hardcoded)
@@ -37,6 +43,7 @@ rules:
     #   - https://intellij-support.jetbrains.com/hc/en-us/community/posts/115000782410-Replace-shortcut-no-longer-shows-replace-box-when-find-box-is-already-open
     manipulators:
       - type: basic
+        <<: *conditions_jetbrains
         from:
           key_code: h
           modifiers:
@@ -44,7 +51,3 @@ rules:
               - left_control
         to:
           - key_code: delete_or_backspace
-        conditions:
-          - type: frontmost_application_if
-            bundle_identifiers:
-              - ^com\.jetbrains\.

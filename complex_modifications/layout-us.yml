@@ -1,0 +1,72 @@
+title: "Settings for keyboards has US layout"
+_aliases:
+  manipulator_base: &manipulator_base
+    conditions:
+      - type: device_if
+        identifiers: [{ vendor_id: 1452, product_id: 832 }]
+
+rules:
+
+  - description: "[US] map fn key to control+option+command."
+    manipulators:
+      - type: basic
+        <<: *manipulator_base
+        from:
+          apple_vendor_top_case_key_code: keyboard_fn
+          modifiers:
+            optional: [ any ]
+        to:
+          - key_code: left_command
+            modifiers:
+              - left_control
+              - left_option
+
+  - description: "[US] map control+option+command+/ to control+option+command+_ ."
+    manipulators:
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: slash
+          modifiers:
+            mandatory:
+              - left_command
+              - left_control
+              - left_option
+        to:
+          - key_code: international1
+            modifiers:
+              - left_command
+              - left_control
+              - left_option
+  
+  - description: "[US] map caps_lock to left_control"
+    manipulators:
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: caps_lock
+        to:
+          - key_code: left_control
+
+  - description: "[US] map (left|right)_command to japanese_(eisuu|kana) if pressed alone"
+    manipulators:
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: left_command
+          modifiers:
+            optional: [ any ]
+        to:
+          - key_code: left_command
+        to_if_alone:
+          - key_code: japanese_eisuu
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: right_command
+          modifiers:
+            optional: [ any ]
+        to:
+          - key_code: right_command
+        to_if_alone:
+          - key_code: japanese_kana
