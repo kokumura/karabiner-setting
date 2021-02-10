@@ -3,22 +3,23 @@ _aliases:
   manipulator_base: &manipulator_base
     conditions:
       - type: device_if
-        identifiers: [{ vendor_id: 76, product_id: 615 }]
+        identifiers:
+          - { vendor_id: 76, product_id: 615 }
+          - { vendor_id: 1452, product_id: 615 }
 
 rules:
 
-  - description: "[JIS] Change caps_lock key to control+option+command."
+  - description: "[JIS] map caps_lock key to control+option+command."
     manipulators:
       - type: basic
         <<: *manipulator_base
         from:
           key_code: caps_lock
           modifiers:
-            optional:
-              - any
+            optional: [ any ]
         to:
           - key_code: left_command
-            modifiers:
+            modifiers:  
               - left_control
               - left_option
 
