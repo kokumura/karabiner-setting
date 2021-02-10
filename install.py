@@ -38,7 +38,7 @@ def main(args):
         try:
             logger.info(f"cmod file: '{cm_file}'")
             with open(cm_file) as f:
-                cm_obj = yaml.load(f)
+                cm_obj = yaml.load(f, Loader=yaml.SafeLoader)
             rules = cm_obj['rules']
             for rule in rules:
                 logger.info(f"add rule: '{rule['description']}'")
