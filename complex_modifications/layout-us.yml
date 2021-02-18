@@ -1,4 +1,4 @@
-title: "Settings for keyboards has US layout"
+title: "Layout US"
 _aliases:
   manipulator_base: &manipulator_base
     conditions:
@@ -7,7 +7,7 @@ _aliases:
 
 rules:
 
-  - description: "[US] map fn key to control+option+command."
+  - description: "map fn key to control+option+command."
     manipulators:
       - type: basic
         <<: *manipulator_base
@@ -21,7 +21,7 @@ rules:
               - left_control
               - left_option
 
-  - description: "[US] map control+option+command+/ to control+option+command+_ ."
+  - description: "map control+option+command+/ to control+option+command+_ ."
     manipulators:
       - type: basic
         <<: *manipulator_base
@@ -39,7 +39,7 @@ rules:
               - left_control
               - left_option
   
-  - description: "[US] map caps_lock to left_control"
+  - description: "map caps_lock to left_control"
     manipulators:
       - type: basic
         <<: *manipulator_base
@@ -48,7 +48,7 @@ rules:
         to:
           - key_code: left_control
 
-  - description: "[US] map (left|right)_command to japanese_(eisuu|kana) if pressed alone"
+  - description: "map (left|right)_command to japanese_(eisuu|kana) if pressed alone"
     manipulators:
       - type: basic
         <<: *manipulator_base

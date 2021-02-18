@@ -1,4 +1,4 @@
-title: "for Google Chrome"
+title: "Google Chrome"
 _aliases:
   manipulator_base: &manipulator_base
     conditions:
@@ -7,7 +7,7 @@ _aliases:
           - ^com\.google\.Chrome$
 
 rules:
-  - description: "Google Chrome: command+(p|n) to command+(left|right) [(prev|next) tab]"
+  - description: "command+(p|n) to command+(left|right) [(prev|next) tab]"
     manipulators:
 
       - type: basic
@@ -35,7 +35,7 @@ rules:
               - left_command
 
 
-  - description: "Google Chrome: control+(p|n|b|f) to (up|down|left|right)_arrow"
+  - description: "control+(p|n|b|f) to (up|down|left|right)_arrow"
     manipulators:
 
       - type: basic
@@ -87,7 +87,7 @@ rules:
           - key_code: right_arrow
 
 
-  - description: "Google Chrome: (control+v|option+v) to (page_down|page_up)"
+  - description: "(control+v|option+v) to (page_down|page_up)"
     manipulators:
 
       - type: basic
@@ -111,7 +111,7 @@ rules:
           - key_code: page_up
 
   # DISABLED because not works in URL bar.
-  # - description: "Google Chrome: control+(a|e) to (home|end)"
+  # - description: "control+(a|e) to (home|end)"
   #   manipulators:
   #
   #     - type: basic

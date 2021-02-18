@@ -1,4 +1,4 @@
-title: "Settings for keyboards has JIS layout"
+title: "Layout JIS"
 _aliases:
   manipulator_base: &manipulator_base
     conditions:
@@ -9,7 +9,7 @@ _aliases:
 
 rules:
 
-  - description: "[JIS] map caps_lock key to control+option+command."
+  - description: "map caps_lock key to control+option+command."
     manipulators:
       - type: basic
         <<: *manipulator_base
@@ -23,7 +23,7 @@ rules:
               - left_control
               - left_option
 
-  - description: "[JIS] map japanese_(eisuu|kana) to (left|right)_command unless pressed alone"
+  - description: "map japanese_(eisuu|kana) to (left|right)_command unless pressed alone"
     manipulators:
       - type: basic
         <<: *manipulator_base

@@ -35,12 +35,20 @@ def main(args):
 
     for cm_file in args.files:
         cm_file = os.path.expanduser(cm_file)
+
         try:
             logger.info(f"cmod file: '{cm_file}'")
             with open(cm_file) as f:
                 cm_obj = yaml.load(f, Loader=yaml.SafeLoader)
+
+            desc_prefix = ""
+            if cm_file_title := cm_obj.get("title"):
+                desc_prefix = f"[{cm_file_title}] "
+
             rules = cm_obj['rules']
             for rule in rules:
+                if desc_prefix:
+                    rule["description"] = desc_prefix + rule["description"]
                 logger.info(f"add rule: '{rule['description']}'")
                 profile_rules.append(rule)
             
