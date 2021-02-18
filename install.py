@@ -56,6 +56,9 @@ def main(args):
                 KARABINER_CMOD_DIR,
                 re.sub(r'\.[^\.]+$','.json', os.path.basename(cm_file)),
             ))
+
+            cm_obj = {k: v for k, v in cm_obj.items() if not k.startswith("_")}
+
             with open(cm_dest_json_file,'w') as f:
                 json.dump(cm_obj, f, indent=2)
                 logger.info(f"wrote cmod file: '%s'", cm_dest_json_file)
