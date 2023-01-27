@@ -70,3 +70,23 @@ rules:
           - key_code: right_command
         to_if_alone:
           - key_code: japanese_kana
+
+  - description: "retain brightness (up|down)"
+    manipulators:
+      - type: basic
+        <<: *manipulator_base
+        from:
+          apple_vendor_top_case_key_code: brightness_up
+          modifiers:
+            optional: [ any ]
+        to:
+          - key_code: display_brightness_increment
+      - type: basic
+        <<: *manipulator_base
+        from:
+          apple_vendor_top_case_key_code: brightness_down
+          modifiers:
+            optional: [ any ]
+        to:
+          - key_code: display_brightness_decrement
+
