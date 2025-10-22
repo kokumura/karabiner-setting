@@ -4,13 +4,20 @@ _aliases:
     conditions:
       - type: device_if
         identifiers:
-          - { vendor_id: 76, product_id: 615 }
-          - { vendor_id: 1452, product_id: 615 }
-          - { vendor_id: 1452, product_id: 630 }
-          - { is_built_in_keyboard: true }
+          - { vendor_id: 13364, product_id: 642 } # Keychron K8 Pro JIS
+
+# Keychron Launcher
+# https://launcher.keychron.com/
+# 
+# 前提とするkeychronのキーマップ
+# 
+# - デフォルトのMacintoshレイアウト (Layer 0) をベースとする
+# - F1-F12: メディアキーでなく標準のファンクションキーに割り当て
+# - left_control と caps_lock を入れ替え
 
 rules:
 
+  # caps_lock を modifier全押しに割り当てる
   - description: "map caps_lock key to control+option+command."
     manipulators:
       - type: basic
@@ -21,9 +28,21 @@ rules:
             optional: [ any ]
         to:
           - key_code: left_command
-            modifiers:  
+            modifiers:
               - left_control
               - left_option
+
+  # E/J をIMEのトグルに使う. cmd + ` をOS側で「前の入力ソースに切り替え」に設定する前提.
+  - description: "map grave_accent_and_tilde to cmd+grave_accent_and_tilde"
+    manipulators:
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: grave_accent_and_tilde
+        to:
+          - key_code: grave_accent_and_tilde
+            modifiers:
+              - left_command
 
   - description: "map japanese_(eisuu|kana) to (left|right)_command unless pressed alone"
     manipulators:
@@ -38,6 +57,7 @@ rules:
         to_if_alone:
           - key_code: japanese_eisuu
       - type: basic
+        <<: *manipulator_base
         from:
           key_code: japanese_kana
           modifiers:

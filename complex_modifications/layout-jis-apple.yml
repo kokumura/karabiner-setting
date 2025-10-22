@@ -1,0 +1,174 @@
+title: "Layout JIS"
+_aliases:
+  manipulator_base: &manipulator_base
+    conditions:
+      - type: device_if
+        identifiers:
+          - { vendor_id: 76, product_id: 615 }
+          - { vendor_id: 1452, product_id: 615 }
+          - { vendor_id: 1452, product_id: 630 }
+          - { is_built_in_keyboard: true }
+
+rules:
+
+  - description: "map caps_lock key to control+option+command."
+    manipulators:
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: caps_lock
+          modifiers:
+            optional: [ any ]
+        to:
+          - key_code: left_command
+            modifiers:  
+              - left_control
+              - left_option
+
+  - description: "map japanese_(eisuu|kana) to (left|right)_command unless pressed alone"
+    manipulators:
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: japanese_eisuu
+          modifiers:
+            optional: [ any ]
+        to:
+          - key_code: left_command
+        to_if_alone:
+          - key_code: japanese_eisuu
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: japanese_kana
+          modifiers:
+            optional: [ any ]
+        to:
+          - key_code: right_command
+        to_if_alone:
+          - key_code: japanese_kana
+
+  - description: "remap control+option+command+(f1|f2) to display_brightness_(increment|decrement)"
+    manipulators:
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: f1
+          modifiers:
+            mandatory: [ left_control, left_option, left_command ]
+        to:
+          - key_code: display_brightness_decrement
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: f2
+          modifiers:
+            mandatory: [ left_control, left_option, left_command ]
+        to:
+          - key_code: display_brightness_increment
+
+
+  - description: "swap [f10-f12] and fn+[f10-f12]"
+    manipulators:
+      # - type: basic
+      #   from:
+      #     key_code: f1
+      #   to:
+      #     - key_code: display_brightness_decrement
+      # - type: basic
+      #   from:
+      #     key_code: f1
+      #     modifiers:
+      #       mandatory: [ fn ]
+      #   to:
+      #     - key_code: f1
+      # - type: basic
+      #   from:
+      #     key_code: f2
+      #   to:
+      #     - key_code: display_brightness_increment
+      # - type: basic
+      #   from:
+      #     key_code: f2
+      #     modifiers:
+      #       mandatory: [ fn ]
+      #   to:
+      #     - key_code: f2
+      # - type: basic
+      #   from:
+      #     key_code: f7
+      #   to:
+      #     - key_code: rewind
+      # - type: basic
+      #   from:
+      #     key_code: f7
+      #     modifiers:
+      #       mandatory: [ fn ]
+      #   to:
+      #     - key_code: f7
+      # - type: basic
+      #   from:
+      #     key_code: f8
+      #   to:
+      #     - key_code: play_or_pause
+      # - type: basic
+      #   from:
+      #     key_code: f8
+      #     modifiers:
+      #       mandatory: [ fn ]
+      #   to:
+      #     - key_code: f8
+      # - type: basic
+      #   from:
+      #     key_code: f9
+      #   to:
+      #     - key_code: fastforward
+      # - type: basic
+      #   from:
+      #     key_code: f9
+      #     modifiers:
+      #       mandatory: [ fn ]
+      #   to:
+      #     - key_code: f9
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: f10
+        to:
+          - key_code: mute
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: f10
+          modifiers:
+            mandatory: [ fn ]
+        to:
+          - key_code: f10
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: f11
+        to:
+          - key_code: volume_decrement
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: f11
+          modifiers:
+            mandatory: [ fn ]
+        to:
+          - key_code: f11
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: f12
+        to:
+          - key_code: volume_increment
+      - type: basic
+        <<: *manipulator_base
+        from:
+          key_code: f12
+          modifiers:
+            mandatory: [ fn ]
+        to:
+          - key_code: f12
