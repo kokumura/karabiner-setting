@@ -8,13 +8,13 @@ So I decided to write my settings in YAML, then convert them to JSON format.
 ## setup (require Python 3.6+)
 
 ```
-pip install -r requirements.txt
+uv sync
 ```
 
 ## install settings
 
 ```
-python install.py complex_modifications/*.yml
+uv run python install.py complex_modifications/*.yml
 ```
 
 Command above does:
